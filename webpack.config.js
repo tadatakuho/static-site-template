@@ -1,14 +1,14 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-module.exports = {
-  entry: "./src/index.ts",
+const webpackConfig = {
+  entry: { index: "./src/js/index.ts", index2: "./src/js/index2.ts" },
   output: {
-    filename: "main.js",
+    filename: "js/[name].js",
     path: path.resolve(__dirname, "docs"),
   },
-  mode: "development",
-  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
+  plugins: [new CleanWebpackPlugin()],
   module: {
     rules: [
       {
@@ -31,3 +31,16 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
 };
+
+Object.keys(webpackConfig.entry).forEach((key) => {
+  webpackConfig.plugins.push(
+    new HtmlWebpackPlugin({
+      template: `./src/${key}.html`, // Source
+      filename: `./${key}.html`,
+      inject: true,
+      chunks: [key], // insert to the root of output folder
+    })
+  );
+});
+
+module.exports = webpackConfig;

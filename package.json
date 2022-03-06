@@ -4,11 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode=production",
+    "build:prd": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
     "start:dev": "webpack-dev-server"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.6.0",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",
