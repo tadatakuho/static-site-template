@@ -4,9 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build:prd": "webpack --mode=production",
-    "build:dev": "webpack --mode=development",
-    "start:dev": "webpack-dev-server"
+    "build": "webpack --mode production",
+    "start:dev": "webpack-dev-server --mode development"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
@@ -21,6 +20,7 @@
     "typescript": "^4.6.2",
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.7.4",
+    "webpack-watched-glob-entries-plugin": "^2.2.4"
   }
 }

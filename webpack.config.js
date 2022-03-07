@@ -1,12 +1,26 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const WebpackWatchedGlobEntries = require("webpack-watched-glob-entries-plugin");
+
+const entries = WebpackWatchedGlobEntries.getEntries(
+  [path.resolve(__dirname, "./src/js/**/*.ts")],
+  {}
+)();
 
 const webpackConfig = {
-  entry: { index: "./src/js/index.ts", index2: "./src/js/index2.ts" },
+  entry: entries,
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "docs"),
+  },
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "docs"),
+    },
+    compress: true,
+    port: 4000,
+    open: true,
   },
   plugins: [new CleanWebpackPlugin()],
   module: {
