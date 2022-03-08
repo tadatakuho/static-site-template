@@ -13,6 +13,8 @@ const webpackConfig = {
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "docs"),
+    // publicPath: "/src/",
+    assetModuleFilename: "images/[hash][ext][query]",
   },
   devServer: {
     static: {
@@ -39,18 +41,26 @@ const webpackConfig = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+        type: "asset/resource",
+      },
     ],
   },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
+  // resolve: {
+  //   extensions: [".tsx", ".ts", ".js"],
+  // },
 };
 
 Object.keys(webpackConfig.entry).forEach((key) => {
   webpackConfig.plugins.push(
     new HtmlWebpackPlugin({
-      template: `./src/${key}.html`, // Source
-      filename: `./${key}.html`,
+      template: `./src/${key}.html`, // 読み込み元のhtmlパス
+      filename: `./${key}.html`, // 出力するhtmlパス
       inject: true,
       chunks: [key], // insert to the root of output folder
     })
