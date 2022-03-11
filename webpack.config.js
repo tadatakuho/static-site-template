@@ -13,7 +13,6 @@ const webpackConfig = {
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "docs"),
-    // publicPath: "/src/",
     assetModuleFilename: "images/[hash][ext][query]",
   },
   devServer: {
@@ -21,7 +20,7 @@ const webpackConfig = {
       directory: path.resolve(__dirname, "docs"),
     },
     compress: true,
-    port: 4000,
+    port: 3000,
     open: true,
   },
   plugins: [new CleanWebpackPlugin()],
@@ -29,12 +28,7 @@ const webpackConfig = {
     rules: [
       {
         test: /(\.s[ac]ss)$/,
-        use: [
-          "style-loader", // creates style nodes from JS strings
-          "css-loader", // translates CSS into CommonJS
-          "postcss-loader",
-          "sass-loader", // compiles Sass to CSS, using Node Sass by default
-        ],
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
       },
       {
         test: /\.tsx?$/,
@@ -51,9 +45,6 @@ const webpackConfig = {
       },
     ],
   },
-  // resolve: {
-  //   extensions: [".tsx", ".ts", ".js"],
-  // },
 };
 
 Object.keys(webpackConfig.entry).forEach((key) => {
@@ -62,7 +53,7 @@ Object.keys(webpackConfig.entry).forEach((key) => {
       template: `./src/${key}.html`, // 読み込み元のhtmlパス
       filename: `./${key}.html`, // 出力するhtmlパス
       inject: true,
-      chunks: [key], // insert to the root of output folder
+      chunks: [key],
     })
   );
 });
