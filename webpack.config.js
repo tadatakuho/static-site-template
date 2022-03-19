@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const WebpackWatchedGlobEntries = require("webpack-watched-glob-entries-plugin");
 
 const entries = WebpackWatchedGlobEntries.getEntries(
-  [path.resolve(__dirname, "./src/js/**/*.ts")],
+  [path.resolve(__dirname, "./src/ts/**/*.ts")],
   {}
 )();
 
@@ -17,7 +17,7 @@ const webpackConfig = {
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "docs"),
+      directory: path.resolve(__dirname, "dist"),
     },
     compress: true,
     port: 3000,
