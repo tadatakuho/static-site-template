@@ -12,7 +12,7 @@ const webpackConfig = {
   entry: entries,
   output: {
     filename: "js/[name].js",
-    path: path.resolve(__dirname, "docs"),
+    path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "images/[hash][ext][query]",
   },
   devServer: {
