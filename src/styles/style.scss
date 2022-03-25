@@ -1,2 +1,27 @@
-body {
+.container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #555;
+}
+
+.button {
+  margin-top: 50px;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  background: #fff;
+
+  a {
+    display: block;
+    color: #555;
+    padding: 20px;
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
