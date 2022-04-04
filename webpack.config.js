@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const WebpackWatchedGlobEntries = require("webpack-watched-glob-entries-plugin");
 
+// エントリーポイントとして、tsファイルを設定
 const entries = WebpackWatchedGlobEntries.getEntries(
   [path.resolve(__dirname, "./src/ts/**/*.ts")],
   {}
@@ -10,11 +11,13 @@ const entries = WebpackWatchedGlobEntries.getEntries(
 
 const webpackConfig = {
   entry: entries,
+  // 出力設定
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "images/[hash][ext][query]",
   },
+  // 開発環境設定
   devServer: {
     static: {
       directory: path.resolve(__dirname, "dist"),
@@ -26,10 +29,12 @@ const webpackConfig = {
   plugins: [new CleanWebpackPlugin()],
   module: {
     rules: [
+      // SCSSを使うための設定
       {
         test: /(\.s[ac]ss)$/,
         use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
       },
+      // TypeScriptを使うための設定
       {
         test: /\.tsx?$/,
         use: "ts-loader",
@@ -47,6 +52,7 @@ const webpackConfig = {
   },
 };
 
+// 複数ページを書き出すための設定
 Object.keys(webpackConfig.entry).forEach((key) => {
   webpackConfig.plugins.push(
     new HtmlWebpackPlugin({
